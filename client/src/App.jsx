@@ -154,7 +154,16 @@ export default function App() {
           <h1>TalentCompass</h1>
           <p className="hero-text">Screen resumes without identity noise, then request a proof call against configured Midnight Preprod contract.</p>
           <div className="action-row">
-            {session ? <button className="ghost-button" onClick={disconnectWallet} disabled={loading}>Disconnect wallet</button> : <button className="primary-button" onClick={connectWallet} disabled={loading}>Connect Lace / 1AM</button>}
+            {session ? (
+              <div className="wallet-info">
+                <button className="ghost-button" onClick={disconnectWallet} disabled={loading}>Disconnect wallet</button>
+                <span className="wallet-address" title={session.walletAddress}>
+                  {session.walletAddress.substring(0, 10)}...{session.walletAddress.substring(session.walletAddress.length - 8)}
+                </span>
+              </div>
+            ) : (
+              <button className="primary-button" onClick={connectWallet} disabled={loading}>Connect Lace / 1AM</button>
+            )}
             <span className="muted-chip">No local deployment</span>
           </div>
         </div>
